@@ -12,27 +12,16 @@ namespace DirectoryService.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Company
+    public partial class CustomerAddress
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Company()
-        {
-            this.CompanyStaff = new HashSet<CompanyStaff>();
-            this.Customer = new HashSet<Customer>();
-        }
-    
         public int ID { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public int CustomerID { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string District { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
         public int Status { get; set; }
         public int CreatorUID { get; set; }
         public string CreatorIP { get; set; }
@@ -43,9 +32,6 @@ namespace DirectoryService.Models
         public string UpdatorRole { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompanyStaff> CompanyStaff { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customer { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

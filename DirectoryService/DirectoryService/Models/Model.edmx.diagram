@@ -5,10 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fd5f0057f528458882febac5eef64168" Name="Diagram1" ZoomLevel="86" >
-        <EntityTypeShape EntityType="Model.Admin" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="Model.CompanyStaff" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="Model.Admin" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Company" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="Model.CompanyStaff" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="Model.CR_Customer_CustomerWorkspace" Width="1.5" PointX="8.25" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="Model.CustomerAddress" Width="1.5" PointX="5.25" PointY="10.5" />
+        <EntityTypeShape EntityType="Model.CustomerPhone" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="Model.CustomerWorkspace" Width="1.5" PointX="6" PointY="2.375" />
         <AssociationConnector Association="Model.FK_CompanyStaff_Company" />
+        <AssociationConnector Association="Model.FK_Customer_Company" />
+        <AssociationConnector Association="Model.FK_CR_Customer_CustomerWorkspace_Customer" />
+        <AssociationConnector Association="Model.FK_CR_Customer_CustomerWorkspace_CustomerWorkspace" />
+        <AssociationConnector Association="Model.FK_CustomerAddress_CustomerID" />
+        <AssociationConnector Association="Model.FK_CustomerPhone_CustomerID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

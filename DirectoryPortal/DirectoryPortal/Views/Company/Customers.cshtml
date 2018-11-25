@@ -6,3 +6,69 @@
 
 <h2>Customers</h2>
 
+<div class="row">
+    <div class="col-xs-4 text-left">
+        <div class="btn btn-xs">
+            <select class="input-sm form-control cursorPointer" id="mainTableFilterStatus" onchange="GetAllCustomersByPage(1); return false;">
+                <option value="-1">All</option>
+                <option selected value="0">Default</option>
+                <option value="1">Active</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-4 text-center">
+        <div class="input-group">
+            <input type="text" class="input-sm form-control" placeholder="Search..." id="mainTableFilterSearch" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-sm btn-default" onclick="GetAllCustomersByPage(1); return false;"><i class="fas fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-4 text-right">
+    </div>
+</div>
+<div class="line lineBlue2px"></div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th><a class="input-sm cursorPointer" onclick="GetAllCustomersByPage(1,'name'); return false;">Name<i class="fas fa-sort pull-right"></i></a> </th>
+                <th><a class="input-sm cursorPointer" onclick="GetAllCustomersByPage(1,'email'); return false;">Email<i class="fas fa-sort pull-right"></i></a></th>
+                <th>Phone</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="mainTableBody"></tbody>
+    </table>
+</div>
+<footer class="panel-footer">
+    <div class="row">
+        <div class="col-xs-4 text-left">
+            <ul class="pagination">
+                <li>
+                    <select class="input-sm form-control cursorPointer" id="mainTablePageSize" onchange="GetAllCustomersByPage(1); return false;">
+                        <option selected value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                        <option value="-1">All</option>
+                    </select>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-xs-4 text-center" id="mainTablePaginationInfo">
+            <small class="text-muted"> Customers 1-25 / 0 Total</small>
+        </div>
+        <div class="col-xs-4 text-right">
+            <ul class="pagination" id="mainTablePagination">
+                <li><a class="input-sm cursorPointer" onclick="GetAllCustomersByPage(1); return false;">1</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script src="~/Assets/Js/Company/CustomerPage.js"></script>

@@ -111,7 +111,7 @@ namespace DirectoryService.Controllers
         public HttpResponseMessage Register([Required]string name, [Required]string email, [Required]string password, [Required]string phone)
         {
             if (!ModelState.IsValid)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Model State not valid!");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Model State not valid!");
 
             try
             {

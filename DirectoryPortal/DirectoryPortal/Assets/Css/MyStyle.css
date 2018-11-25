@@ -1,29 +1,58 @@
-﻿.line{
-    height:2px;
-    margin:10px 0;
-    overflow:hidden;
-    background-color:transparent;
+﻿.line {
+    height: 2px;
+    margin: 10px 0;
+    overflow: hidden;
+    background-color: transparent;
     border-width: 0px;
-    border-top:1px solid #ffffff
+    border-top: 1px solid #ffffff
 }
-.modal-header .close{
+.lineBlue2px {
+    border-top: 2px solid #5bc0de;
+    margin: 8px 0 0 0;
+}
+
+.modal-header .close {
     margin-top: -2px;
     position: absolute;
     top: 15px;
     right: 15px;
 }
-.cursorPointer{
-    cursor:pointer;
+
+.cursorPointer {
+    cursor: pointer;
 }
+
 .mt-8 {
-    margin-top:8px;
+    margin-top: 8px;
 }
+
 .ml-5 {
     margin-left: 5px;
 }
-.p-5{
-    padding:5px;
+
+.p-5 {
+    padding: 5px;
 }
+
 .colorWhite {
     color: #fff;
+}
+
+.imgTable {
+    width: 28px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    height: 28px;
+}
+
+table {
+    font-size: 12px;
+}
+
+    table > tbody > tr > td {
+        vertical-align: middle !important;
+    }
+
+.pagination {
+    margin: 0px !important;
 }

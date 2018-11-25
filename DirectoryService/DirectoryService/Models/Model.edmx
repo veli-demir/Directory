@@ -78,6 +78,87 @@
           <Property Name="UpdatorRole" Type="nvarchar(max)" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="CR_Customer_CustomerWorkspace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CustomerWorkspaceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatorUID" Type="int" Nullable="false" />
+          <Property Name="CreatorIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatorUID" Type="int" />
+          <Property Name="UpdatorIP" Type="nvarchar(max)" />
+          <Property Name="UpdatorRole" Type="nvarchar(max)" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="District" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatorUID" Type="int" Nullable="false" />
+          <Property Name="CreatorIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatorUID" Type="int" />
+          <Property Name="UpdatorIP" Type="nvarchar(max)" />
+          <Property Name="UpdatorRole" Type="nvarchar(max)" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerPhone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatorUID" Type="int" Nullable="false" />
+          <Property Name="CreatorIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatorUID" Type="int" />
+          <Property Name="UpdatorIP" Type="nvarchar(max)" />
+          <Property Name="UpdatorRole" Type="nvarchar(max)" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustomerWorkspace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatorUID" Type="int" Nullable="false" />
+          <Property Name="CreatorIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CompanyStaff_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="CompanyStaff" Type="Self.CompanyStaff" Multiplicity="*" />
@@ -90,13 +171,98 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CR_Customer_CustomerWorkspace_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CR_Customer_CustomerWorkspace" Type="Self.CR_Customer_CustomerWorkspace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CR_Customer_CustomerWorkspace">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_Customer_CustomerWorkspace_CustomerWorkspace">
+          <End Role="CustomerWorkspace" Type="Self.CustomerWorkspace" Multiplicity="1" />
+          <End Role="CR_Customer_CustomerWorkspace" Type="Self.CR_Customer_CustomerWorkspace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerWorkspace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CR_Customer_CustomerWorkspace">
+              <PropertyRef Name="CustomerWorkspaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAddress_CustomerID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerAddress">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPhone_CustomerID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerPhone" Type="Self.CustomerPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerPhone">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyStaff" EntityType="Self.CompanyStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CR_Customer_CustomerWorkspace" EntityType="Self.CR_Customer_CustomerWorkspace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerPhone" EntityType="Self.CustomerPhone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerWorkspace" EntityType="Self.CustomerWorkspace" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CompanyStaff_Company" Association="Self.FK_CompanyStaff_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="CompanyStaff" EntitySet="CompanyStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_Customer_CustomerWorkspace_Customer" Association="Self.FK_CR_Customer_CustomerWorkspace_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CR_Customer_CustomerWorkspace" EntitySet="CR_Customer_CustomerWorkspace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_Customer_CustomerWorkspace_CustomerWorkspace" Association="Self.FK_CR_Customer_CustomerWorkspace_CustomerWorkspace">
+            <End Role="CustomerWorkspace" EntitySet="CustomerWorkspace" />
+            <End Role="CR_Customer_CustomerWorkspace" EntitySet="CR_Customer_CustomerWorkspace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAddress_CustomerID" Association="Self.FK_CustomerAddress_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPhone_CustomerID" Association="Self.FK_CustomerPhone_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerPhone" EntitySet="CustomerPhone" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -107,9 +273,34 @@
           <EntitySet Name="Admin" EntityType="Model.Admin" />
           <EntitySet Name="Company" EntityType="Model.Company" />
           <EntitySet Name="CompanyStaff" EntityType="Model.CompanyStaff" />
+          <EntitySet Name="CR_Customer_CustomerWorkspace" EntityType="Model.CR_Customer_CustomerWorkspace" />
+          <EntitySet Name="Customer" EntityType="Model.Customer" />
+          <EntitySet Name="CustomerAddress" EntityType="Model.CustomerAddress" />
+          <EntitySet Name="CustomerPhone" EntityType="Model.CustomerPhone" />
+          <EntitySet Name="CustomerWorkspace" EntityType="Model.CustomerWorkspace" />
           <AssociationSet Name="FK_CompanyStaff_Company" Association="Model.FK_CompanyStaff_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="CompanyStaff" EntitySet="CompanyStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="Model.FK_Customer_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_Customer_CustomerWorkspace_Customer" Association="Model.FK_CR_Customer_CustomerWorkspace_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CR_Customer_CustomerWorkspace" EntitySet="CR_Customer_CustomerWorkspace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_Customer_CustomerWorkspace_CustomerWorkspace" Association="Model.FK_CR_Customer_CustomerWorkspace_CustomerWorkspace">
+            <End Role="CustomerWorkspace" EntitySet="CustomerWorkspace" />
+            <End Role="CR_Customer_CustomerWorkspace" EntitySet="CR_Customer_CustomerWorkspace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAddress_CustomerID" Association="Model.FK_CustomerAddress_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPhone_CustomerID" Association="Model.FK_CustomerPhone_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerPhone" EntitySet="CustomerPhone" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
@@ -158,6 +349,7 @@
           <Property Name="UpdatorRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CompanyStaff" Relationship="Model.FK_CompanyStaff_Company" FromRole="Company" ToRole="CompanyStaff" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
         </EntityType>
         <EntityType Name="CompanyStaff">
           <Key>
@@ -187,6 +379,96 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Company" Relationship="Model.FK_CompanyStaff_Company" FromRole="CompanyStaff" ToRole="Company" />
         </EntityType>
+        <EntityType Name="CR_Customer_CustomerWorkspace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerWorkspaceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_CR_Customer_CustomerWorkspace_Customer" FromRole="CR_Customer_CustomerWorkspace" ToRole="Customer" />
+          <NavigationProperty Name="CustomerWorkspace" Relationship="Model.FK_CR_Customer_CustomerWorkspace_CustomerWorkspace" FromRole="CR_Customer_CustomerWorkspace" ToRole="CustomerWorkspace" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatorUID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorRole" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatorUID" Type="Int32" />
+          <Property Name="UpdatorIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatorRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="Model.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
+          <NavigationProperty Name="CR_Customer_CustomerWorkspace" Relationship="Model.FK_CR_Customer_CustomerWorkspace_Customer" FromRole="Customer" ToRole="CR_Customer_CustomerWorkspace" />
+          <NavigationProperty Name="CustomerAddress" Relationship="Model.FK_CustomerAddress_CustomerID" FromRole="Customer" ToRole="CustomerAddress" />
+          <NavigationProperty Name="CustomerPhone" Relationship="Model.FK_CustomerPhone_CustomerID" FromRole="Customer" ToRole="CustomerPhone" />
+        </EntityType>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatorUID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorRole" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatorUID" Type="Int32" />
+          <Property Name="UpdatorIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatorRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_CustomerAddress_CustomerID" FromRole="CustomerAddress" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="CustomerPhone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatorUID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorRole" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatorUID" Type="Int32" />
+          <Property Name="UpdatorIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatorRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Model.FK_CustomerPhone_CustomerID" FromRole="CustomerPhone" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="CustomerWorkspace">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatorUID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorRole" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CR_Customer_CustomerWorkspace" Relationship="Model.FK_CR_Customer_CustomerWorkspace_CustomerWorkspace" FromRole="CustomerWorkspace" ToRole="CR_Customer_CustomerWorkspace" />
+        </EntityType>
         <Association Name="FK_CompanyStaff_Company">
           <End Type="Model.Company" Role="Company" Multiplicity="1" />
           <End Type="Model.CompanyStaff" Role="CompanyStaff" Multiplicity="*" />
@@ -199,7 +481,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Customer_Company">
+          <End Type="Model.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_Customer_CustomerWorkspace_Customer">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Model.CR_Customer_CustomerWorkspace" Role="CR_Customer_CustomerWorkspace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CR_Customer_CustomerWorkspace">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_Customer_CustomerWorkspace_CustomerWorkspace">
+          <End Type="Model.CustomerWorkspace" Role="CustomerWorkspace" Multiplicity="1" />
+          <End Type="Model.CR_Customer_CustomerWorkspace" Role="CR_Customer_CustomerWorkspace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerWorkspace">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CR_Customer_CustomerWorkspace">
+              <PropertyRef Name="CustomerWorkspaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAddress_CustomerID">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Model.CustomerAddress" Role="CustomerAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerAddress">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPhone_CustomerID">
+          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Model.CustomerPhone" Role="CustomerPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomerPhone">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -279,6 +621,92 @@
                 <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CR_Customer_CustomerWorkspace">
+            <EntityTypeMapping TypeName="Model.CR_Customer_CustomerWorkspace">
+              <MappingFragment StoreEntitySet="CR_Customer_CustomerWorkspace">
+                <ScalarProperty Name="CustomerWorkspaceID" ColumnName="CustomerWorkspaceID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatorRole" ColumnName="UpdatorRole" />
+                <ScalarProperty Name="UpdatorIP" ColumnName="UpdatorIP" />
+                <ScalarProperty Name="UpdatorUID" ColumnName="UpdatorUID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatorRole" ColumnName="CreatorRole" />
+                <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
+                <ScalarProperty Name="CreatorUID" ColumnName="CreatorUID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerAddress">
+            <EntityTypeMapping TypeName="Model.CustomerAddress">
+              <MappingFragment StoreEntitySet="CustomerAddress">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatorRole" ColumnName="UpdatorRole" />
+                <ScalarProperty Name="UpdatorIP" ColumnName="UpdatorIP" />
+                <ScalarProperty Name="UpdatorUID" ColumnName="UpdatorUID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatorRole" ColumnName="CreatorRole" />
+                <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
+                <ScalarProperty Name="CreatorUID" ColumnName="CreatorUID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerPhone">
+            <EntityTypeMapping TypeName="Model.CustomerPhone">
+              <MappingFragment StoreEntitySet="CustomerPhone">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdatorRole" ColumnName="UpdatorRole" />
+                <ScalarProperty Name="UpdatorIP" ColumnName="UpdatorIP" />
+                <ScalarProperty Name="UpdatorUID" ColumnName="UpdatorUID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatorRole" ColumnName="CreatorRole" />
+                <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
+                <ScalarProperty Name="CreatorUID" ColumnName="CreatorUID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerWorkspace">
+            <EntityTypeMapping TypeName="Model.CustomerWorkspace">
+              <MappingFragment StoreEntitySet="CustomerWorkspace">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatorRole" ColumnName="CreatorRole" />
+                <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
+                <ScalarProperty Name="CreatorUID" ColumnName="CreatorUID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

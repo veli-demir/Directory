@@ -165,6 +165,8 @@
     <Content Include="Assets\Css\LoginPage.css" />
     <Content Include="Assets\Css\MyStyle.css" />
     <Content Include="Assets\Image\directory.png" />
+    <Content Include="Assets\Image\user-silhouette.png" />
+    <Content Include="Assets\Js\Company\CustomerPage.js" />
     <Content Include="Assets\Js\Login\Login.js" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\Css\Default\fonts\glyphicons-halflings-regular.svg" />

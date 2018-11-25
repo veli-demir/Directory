@@ -208,8 +208,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AuthanticateController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Dtos\CustomerWorkspaceDto.cs" />
+    <Compile Include="Dtos\CustomerPhoneDto.cs" />
+    <Compile Include="Dtos\CustomerAddressDto.cs" />
+    <Compile Include="Dtos\ResponseObjectDto.cs" />
+    <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\AuthorizedDto.cs" />
     <Compile Include="Dtos\AuthTokenDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,6 +228,21 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyStaff.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CR_Customer_CustomerWorkspace.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerAddress.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerPhone.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerWorkspace.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model.Context.cs">

@@ -28,5 +28,10 @@ namespace DirectoryService.Models
         public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<CompanyStaff> CompanyStaff { get; set; }
+        public virtual DbSet<CR_Customer_CustomerWorkspace> CR_Customer_CustomerWorkspace { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<CustomerAddress> CustomerAddress { get; set; }
+        public virtual DbSet<CustomerPhone> CustomerPhone { get; set; }
+        public virtual DbSet<CustomerWorkspace> CustomerWorkspace { get; set; }
     }
 }

@@ -4,19 +4,26 @@
 <html>
 <head>
     @{
+        string g_LocalUrl = ConfigurationManager.AppSettings["LocalUrl"];
+        string g_ServiceUrl = ConfigurationManager.AppSettings["ServiceUrl"];
+
         if (Session["AuthorizedName"] != null && Session["AuthorizedToken"] != null && Session["AuthorizedRole"] != null && Session["CompanyID"] != null)
         {
             string AuthorizedName = Session["AuthorizedName"].ToString();
             string AuthorizedToken = Session["AuthorizedToken"].ToString();
             string CompanyID = Session["CompanyID"].ToString();
             string AuthorizedRole = Session["AuthorizedRole"].ToString();
+
+            @Html.Hidden("g_HiddenLocalUrl", g_LocalUrl);
+            @Html.Hidden("g_HiddenServiceUrl", g_ServiceUrl);
+
+            @Html.Hidden("g_HiddenCompanyID", CompanyID);
+            @Html.Hidden("g_HiddenAuthorizedToken", AuthorizedToken);
         }
         else
         {
             Response.Redirect(Url.RouteUrl(new { controller = "Login", action = "Login" }));
         }
-
-        string g_LocalUrl = ConfigurationManager.AppSettings["LocalUrl"];
     }
 
     <meta charset="utf-8" />
@@ -26,8 +33,18 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Assets/Css/LayoutPage.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    @* Scripts *@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
+    <input id="g_HiddenLocalUrl" type="hidden" value="" runat="server" />
+    <input id="g_HiddenServiceUrl" type="hidden" value="" runat="server" />
+    <input id="g_HiddenCompanyID" type="hidden" value="" runat="server" />
+    <input id="g_HiddenAuthorizedToken" type="hidden" value="" runat="server" />
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -56,7 +73,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                             <div>
-                                <img class="imgNavbarBrand" src="/Assets/Image/directory.png">
+                                <img class="imgNavbarDropdown" src="/Assets/Image/directory.png">
                                 Directory
                                 <b class="caret ml-5"></b>
                             </div>
@@ -77,7 +94,7 @@
             <div class="col-sm-3 col-md-2 sidebar" id="leftMenu">
                 <ul class="nav nav-sidebar">
                     <li id="leftMenuDashboard"><a href="../Company/Dashboard"><i class="fas fa-home fa-lg colorWhite"></i> Dashboard </a></li>
-                    <li id="leftMenuCustomers" ><a href="../Company/Customers"><i class="fas fa-users fa-lg colorWhite"></i> Customers </a></li>
+                    <li id="leftMenuCustomers"><a href="../Company/Customers"><i class="fas fa-users fa-lg colorWhite"></i> Customers </a></li>
                     <li id="leftMenuReports" class="cursorPointer" data-toggle="collapse" data-target="#leftMenuReports_Submenu">
                         <a><i class="fas fa-file-signature fa-lg colorWhite"></i> Reports <span class="caret pull-right mt-8"></span></a>
                         <ul id="leftMenuReports_Submenu" class="sub-menu collapse">
