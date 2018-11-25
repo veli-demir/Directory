@@ -1,42 +1,129 @@
-﻿<!DOCTYPE html>
+﻿
+@using System.Configuration;
+<!DOCTYPE html>
 <html>
 <head>
+    @{
+        if (Session["AuthorizedName"] != null && Session["AuthorizedToken"] != null && Session["AuthorizedRole"] != null && Session["CompanyID"] != null)
+        {
+            string AuthorizedName = Session["AuthorizedName"].ToString();
+            string AuthorizedToken = Session["AuthorizedToken"].ToString();
+            string CompanyID = Session["CompanyID"].ToString();
+            string AuthorizedRole = Session["AuthorizedRole"].ToString();
+        }
+        else
+        {
+            Response.Redirect(Url.RouteUrl(new { controller = "Login", action = "Login" }));
+        }
+
+        string g_LocalUrl = ConfigurationManager.AppSettings["LocalUrl"];
+    }
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Assets/Css/LayoutPage.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed p-5" data-toggle="collapse" data-target="#navbarDropdown" aria-expanded="false" aria-controls="navbar">
+                    <div class="colorWhite">
+                        <img class="imgNavbarDropdown" src="/Assets/Image/directory.png">
+                        Directory
+                        <b class="caret ml-5"></b>
+                    </div>
+                </button>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#leftMenu" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="#"><img class="imgNavbarBrand" src="/Assets/Image/directory.png">Directory</a>
+                <ul id="navbarDropdown" class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="../Company/Settings">Settings</a></li>
+                    <li><a href="../Login/Login">Logout</a></li>
+                </ul>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                            <div>
+                                <img class="imgNavbarBrand" src="/Assets/Image/directory.png">
+                                Directory
+                                <b class="caret ml-5"></b>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="../Company/Settings">Settings</a></li>
+                            <li><a href="../Login/Login">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar" id="leftMenu">
+                <ul class="nav nav-sidebar">
+                    <li id="leftMenuDashboard"><a href="../Company/Dashboard"><i class="fas fa-home fa-lg colorWhite"></i> Dashboard </a></li>
+                    <li id="leftMenuCustomers" ><a href="../Company/Customers"><i class="fas fa-users fa-lg colorWhite"></i> Customers </a></li>
+                    <li id="leftMenuReports" class="cursorPointer" data-toggle="collapse" data-target="#leftMenuReports_Submenu">
+                        <a><i class="fas fa-file-signature fa-lg colorWhite"></i> Reports <span class="caret pull-right mt-8"></span></a>
+                        <ul id="leftMenuReports_Submenu" class="sub-menu collapse">
+                            <li id="leftMenuReport1" class="active"><a href="../Company/Report1"><strong>&bull;</strong> Report1</a></li>
+                            <li id="leftMenuReport2"><a href="../Company/Report2"><strong>&bull;</strong> Report2</a></li>
+                        </ul>
+                    </li>
+                    <li id="leftMenuSettings"><a href="../Company/Settings"><i class="fas fa-cogs fa-lg colorWhite"></i> Settings</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        // for LeftMenu (Selected Page)
+        $(document).ready(function () {
+
+            var page = (window.location.href).split("#")[0];
+            page = "#leftMenu" + page.split("/").pop();
+            // for QueryString
+            page = page.split("?")[0];
+
+            if (page === "#leftMenuReport1" || page === "#leftMenuReport2") {
+
+                $("#leftMenuReports").addClass("active");
+                $("#leftMenuReports_Submenu").addClass("in");
+
+                if (page === "#leftMenuReport1") {
+
+                    $("#leftMenuReport1").addClass("active");
+                } else if (page === "#leftMenuReport2") {
+
+                    $("#leftMenuReport1").addClass("active");
+                }
+            } else {
+                $(page).addClass("active");
+            }
+
+        });
+    </script>
 </body>
 </html>

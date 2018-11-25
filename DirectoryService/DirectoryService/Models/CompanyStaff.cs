@@ -28,12 +28,13 @@ namespace DirectoryService.Models
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public int Status { get; set; }
-        public System.DateTime CreatorUID { get; set; }
-        public System.DateTime CreatorIP { get; set; }
-        public System.DateTime CreatorRole { get; set; }
-        public Nullable<System.DateTime> UpdatorUID { get; set; }
-        public Nullable<System.DateTime> UpdatorIP { get; set; }
-        public Nullable<System.DateTime> Updatorrole { get; set; }
+        public int CreatorUID { get; set; }
+        public string CreatorIP { get; set; }
+        public string CreatorRole { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public Nullable<int> UpdatorUID { get; set; }
+        public string UpdatorIP { get; set; }
+        public string UpdatorRole { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
         public virtual Company Company { get; set; }

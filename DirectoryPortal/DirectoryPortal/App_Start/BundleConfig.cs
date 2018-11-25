@@ -23,7 +23,8 @@ namespace DirectoryPortal
                       "~/Assets/Js/Default/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Assets/Css/Default/Content/bootstrap.css"));
+                      "~/Assets/Css/Default/Content/bootstrap.css",
+                      "~/Assets/Css/MyStyle.css"));
         }
     }
 }

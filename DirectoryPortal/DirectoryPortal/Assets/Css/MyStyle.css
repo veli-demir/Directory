@@ -1,0 +1,29 @@
+﻿.line{
+    height:2px;
+    margin:10px 0;
+    overflow:hidden;
+    background-color:transparent;
+    border-width: 0px;
+    border-top:1px solid #ffffff
+}
+.modal-header .close{
+    margin-top: -2px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.cursorPointer{
+    cursor:pointer;
+}
+.mt-8 {
+    margin-top:8px;
+}
+.ml-5 {
+    margin-left: 5px;
+}
+.p-5{
+    padding:5px;
+}
+.colorWhite {
+    color: #fff;
+}

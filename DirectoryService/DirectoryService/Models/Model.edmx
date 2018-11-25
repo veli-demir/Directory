@@ -42,12 +42,13 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ImageUrl" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="CreatorUID" Type="datetime" Nullable="false" />
-          <Property Name="CreatorIP" Type="datetime" Nullable="false" />
-          <Property Name="CreatorRole" Type="datetime" Nullable="false" />
-          <Property Name="UpdatorUID" Type="datetime" />
-          <Property Name="UpdatorIP" Type="datetime" />
-          <Property Name="Updatorrole" Type="datetime" />
+          <Property Name="CreatorUID" Type="int" Nullable="false" />
+          <Property Name="CreatorIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatorUID" Type="int" />
+          <Property Name="UpdatorIP" Type="nvarchar(max)" />
+          <Property Name="UpdatorRole" Type="nvarchar(max)" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="CompanyStaff">
@@ -68,12 +69,13 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ImageUrl" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="CreatorUID" Type="datetime" Nullable="false" />
-          <Property Name="CreatorIP" Type="datetime" Nullable="false" />
-          <Property Name="CreatorRole" Type="datetime" Nullable="false" />
-          <Property Name="UpdatorUID" Type="datetime" />
-          <Property Name="UpdatorIP" Type="datetime" />
-          <Property Name="Updatorrole" Type="datetime" />
+          <Property Name="CreatorUID" Type="int" Nullable="false" />
+          <Property Name="CreatorIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorRole" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatorUID" Type="int" />
+          <Property Name="UpdatorIP" Type="nvarchar(max)" />
+          <Property Name="UpdatorRole" Type="nvarchar(max)" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
         <Association Name="FK_CompanyStaff_Company">
@@ -147,12 +149,13 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="CreatorUID" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatorIP" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatorRole" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdatorUID" Type="DateTime" Precision="3" />
-          <Property Name="UpdatorIP" Type="DateTime" Precision="3" />
-          <Property Name="Updatorrole" Type="DateTime" Precision="3" />
+          <Property Name="CreatorUID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorRole" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatorUID" Type="Int32" />
+          <Property Name="UpdatorIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatorRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CompanyStaff" Relationship="Model.FK_CompanyStaff_Company" FromRole="Company" ToRole="CompanyStaff" />
         </EntityType>
@@ -174,12 +177,13 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="CreatorUID" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatorIP" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatorRole" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdatorUID" Type="DateTime" Precision="3" />
-          <Property Name="UpdatorIP" Type="DateTime" Precision="3" />
-          <Property Name="Updatorrole" Type="DateTime" Precision="3" />
+          <Property Name="CreatorUID" Type="Int32" Nullable="false" />
+          <Property Name="CreatorIP" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorRole" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatorUID" Type="Int32" />
+          <Property Name="UpdatorIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatorRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Company" Relationship="Model.FK_CompanyStaff_Company" FromRole="CompanyStaff" ToRole="Company" />
         </EntityType>
@@ -228,9 +232,10 @@
             <EntityTypeMapping TypeName="Model.Company">
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="Updatorrole" ColumnName="Updatorrole" />
+                <ScalarProperty Name="UpdatorRole" ColumnName="UpdatorRole" />
                 <ScalarProperty Name="UpdatorIP" ColumnName="UpdatorIP" />
                 <ScalarProperty Name="UpdatorUID" ColumnName="UpdatorUID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="CreatorRole" ColumnName="CreatorRole" />
                 <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
                 <ScalarProperty Name="CreatorUID" ColumnName="CreatorUID" />
@@ -254,9 +259,10 @@
             <EntityTypeMapping TypeName="Model.CompanyStaff">
               <MappingFragment StoreEntitySet="CompanyStaff">
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="Updatorrole" ColumnName="Updatorrole" />
+                <ScalarProperty Name="UpdatorRole" ColumnName="UpdatorRole" />
                 <ScalarProperty Name="UpdatorIP" ColumnName="UpdatorIP" />
                 <ScalarProperty Name="UpdatorUID" ColumnName="UpdatorUID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="CreatorRole" ColumnName="CreatorRole" />
                 <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
                 <ScalarProperty Name="CreatorUID" ColumnName="CreatorUID" />

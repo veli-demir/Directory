@@ -1,0 +1,110 @@
+﻿@{ Layout = null;}
+
+<!DOCTYPE html>
+<html>
+<head>
+    @{
+        Session["AuthorizedName"] = null;
+        Session["AuthorizedToken"] = null;
+        Session["AuthorizedRole"] = null;
+        Session["AdminID"] = null;
+        Session["CompanyID"] = null;
+        Session["StaffID"] = null;
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Assets/Css/LoginPage.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <div class="container">
+
+        <form class="form-signin">
+            <img style="display:block; margin: 0 auto" src="~/Assets/Image/directory.png" />
+            <h2 class="form-signin-heading">Directory</h2>
+            <div class="form-group">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            </div>
+            <div class="form-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+                <a href="#modalRemindPassword" data-toggle="modal" class="pull-right">Forgot my password</a>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Login(); return false;">Sign in</button>
+            <!-- Button trigger modal -->
+            <div class="line"></div>
+            <a href="#modalRegister" data-toggle="modal" class="pull-right">Sign up</a>
+        </form>
+    </div>
+
+    <!-- Modals -->
+    <div>
+
+        <!-- Register Modal -->
+        <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Register</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" id="inputNameRegister" class="form-control" placeholder="Name" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="inputEmailRegister" class="form-control" placeholder="Email Address" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="inputPhoneRegister" class="form-control" placeholder="Phone" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="inputPasswordRegister" class="form-control" placeholder="Password" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="inputPasswordAgainRegister" class="form-control" placeholder="Password Again" required="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="Register(); return false;">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RemindPassword Modal -->
+        <div class="modal fade" id="modalRemindPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Forgot my password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="Register(); return false;">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Assets/Js/Login/Login.js"></script>
+</body>
+</html>
+

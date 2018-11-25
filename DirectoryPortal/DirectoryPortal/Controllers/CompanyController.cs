@@ -8,28 +8,31 @@ namespace DirectoryPortal.Controllers
 {
     public class CompanyController : Controller
     {
-        public ActionResult Login()
+
+        public ActionResult Dashboard()
         {
             return View();
         }
 
-        public ActionResult Index()
+        public ActionResult Customers()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Report1()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Report2()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
     }
 }

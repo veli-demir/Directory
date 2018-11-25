@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -148,6 +149,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Dtos\AuthorizedDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,8 +161,11 @@
     <Content Include="Assets\Css\Default\Content\bootstrap-theme.min.css" />
     <Content Include="Assets\Css\Default\Content\bootstrap.css" />
     <Content Include="Assets\Css\Default\Content\bootstrap.min.css" />
+    <Content Include="Assets\Css\LayoutPage.css" />
     <Content Include="Assets\Css\LoginPage.css" />
+    <Content Include="Assets\Css\MyStyle.css" />
     <Content Include="Assets\Image\directory.png" />
+    <Content Include="Assets\Js\Login\Login.js" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\Css\Default\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -191,10 +197,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Company\About.cshtml" />
-    <Content Include="Views\Company\Contact.cshtml" />
-    <Content Include="Views\Company\Index.cshtml" />
-    <Content Include="Views\Company\Login.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Company\Dashboard.cshtml" />
+    <Content Include="Views\Company\Customers.cshtml" />
+    <Content Include="Views\Company\Report1.cshtml" />
+    <Content Include="Views\Company\Report2.cshtml" />
+    <Content Include="Views\Company\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
