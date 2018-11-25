@@ -6,8 +6,13 @@ using System.Web.Mvc;
 
 namespace DirectoryPortal.Controllers
 {
-    public class HomeController : Controller
+    public class CompanyController : Controller
     {
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();

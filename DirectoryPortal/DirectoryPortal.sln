@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28306.52
+VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryPortal", "DirectoryPortal\DirectoryPortal.csproj", "{B9CAC017-48A0-4D4D-A5A2-2BF2E0CDEBDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryPortal", "DirectoryPortal\DirectoryPortal.csproj", "{41BEB2CF-DD69-4AE7-80A5-05FE6E8D1DFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B9CAC017-48A0-4D4D-A5A2-2BF2E0CDEBDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9CAC017-48A0-4D4D-A5A2-2BF2E0CDEBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9CAC017-48A0-4D4D-A5A2-2BF2E0CDEBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9CAC017-48A0-4D4D-A5A2-2BF2E0CDEBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41BEB2CF-DD69-4AE7-80A5-05FE6E8D1DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41BEB2CF-DD69-4AE7-80A5-05FE6E8D1DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41BEB2CF-DD69-4AE7-80A5-05FE6E8D1DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41BEB2CF-DD69-4AE7-80A5-05FE6E8D1DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AC4522CA-AE94-4876-8829-0E10906DB63D}
+		SolutionGuid = {E024469F-54C2-4CD6-8648-15D1FDF84FB7}
 	EndGlobalSection
 EndGlobal
