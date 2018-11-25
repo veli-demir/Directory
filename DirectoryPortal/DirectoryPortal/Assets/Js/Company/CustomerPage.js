@@ -20,7 +20,7 @@ function GetAllCustomersByPage(pageIndex, selectedSortColumn, selectedSortOrder)
     if (selectedSortColumn === g_TempSelectedSortColumn) { g_TempSelectedSortOrder = g_TempSelectedSortOrder === true ? false : true; } else { g_TempSelectedSortOrder = true; }
 
     g_TempSelectedSortColumn = selectedSortColumn === undefined ? "" : selectedSortColumn;
-    
+
     var pageSize = jQuery('#mainTablePageSize').val();
 
     var filterStatus = jQuery('#mainTableFilterStatus').val();
@@ -31,10 +31,10 @@ function GetAllCustomersByPage(pageIndex, selectedSortColumn, selectedSortOrder)
     jQuery.support.cors = true;
     $.ajax({
         type: "GET",
-        url: g_ServiceUrl + "/api/Customer/GetCustomer" + params,
+        url: g_ServiceUrl + "/api/Customer/GetAllCustomersByPage" + params,
         dataType: 'json',
         cache: false,
-        headers: { "Authorization": "Bearer " + g_AuthorizedToken},
+        headers: { "Authorization": "Bearer " + g_AuthorizedToken },
         success: function (data) {
             if (data !== null && data !== undefined && data !== "undefined" && data !== "") {
 
@@ -67,6 +67,16 @@ function WriteResponseAllCustomersByPage(customers) {
         strResponse += '<td>' + customer.Phone + '</td>';
         strResponse += '<td>' + (customer.Description !== null ? customer.Description : '') + '</td>';
         strResponse += '<td> <i class="fa fa-circle" title="' + statusTitle + '" style="color:' + statusColor + '"></i></td>';
+
+        strResponse += '<td> <a onclick="GetCustomerForUpdate(' + customer.ID + ');return false;" href="#modalCustomerCreateOrUpdate" data-toggle="modal" title="Update"><i class="fas fa-edit"></i></a></td>';
+
+        if (customer.Status !== -1) {
+
+            strResponse += '<td> <a onclick="jQuery(\'#inputCustomerID\').val(' + customer.ID + ');jQuery(\'#inputCustomerRollback\').val(false); return false;" href="#modalCustomerDeleteOrRollback" data-toggle="modal" title="Delete"><i class="fas fa-trash-alt"></i></a></td>';
+        } else {
+
+            strResponse += '<td> <a onclick="jQuery(\'#inputCustomerID\').val(' + customer.ID + ');jQuery(\'#inputCustomerRollback\').val(true); return false;" href="#modalCustomerDeleteOrRollback" data-toggle="modal" title="Rollback"><i class="fas fa-undo"></i></a></td>';
+        }
         strResponse += '</tr>';
     });
 
@@ -92,4 +102,122 @@ function WritePaginationAllCustomersByPage(currentPageIndex, allItemCount, curre
     var strTotalCountShow = "Customers " + (((currentPageIndex - 1) * currentPageSize) + 1) + "-" + (((currentPageIndex) * currentPageSize)) + " / " + allItemCount + " Total";
     jQuery("#mainTablePaginationInfo").html(strTotalCountShow);
 
+}
+
+function CleanCustomerForUpdate() {
+
+    jQuery('#inputCustomerID').val(0);
+    jQuery('#inputCustomerName').val('');
+    jQuery('#inputCustomerEmail').val('');
+    jQuery('#inputCustomerDescription').val('');
+    document.getElementById('inputCustomerStatus').checked = true;
+}
+
+function CreateOrUpdateCusotmer() {
+
+    var customerID = jQuery('#inputCustomerID').val();
+
+    var customer = {
+        CompanyID: g_CompanyID,
+        ID: customerID,
+        Name: jQuery('#inputCustomerName').val(),
+        Email: jQuery('#inputCustomerEmail').val(),
+        Description: jQuery('#inputCustomerDescription').val(),
+        Status: jQuery('#inputCustomerStatus').is(':checked') === true ? 1 : 0
+    };
+
+    var payload = JSON.stringify(customer);
+    jQuery.support.cors = true;
+    $.ajax({
+        type: customerID === "0" ? "POST" : "PUT",
+        url: g_ServiceUrl + "/api/Customer/" + (customerID === "0" ? "CreateCustomer" : "UpdateCustomer"),
+        dataType: 'json',
+        data: payload,
+        contentType: "application/json;charset=utf-8",
+        cache: false,
+        headers: { "Authorization": "Bearer " + g_AuthorizedToken },
+        success: function (data) {
+
+            if (data.HttpStatusCode === 200) {
+                GetAllCustomersByPage(1);
+
+                alert("İşleminiz başarıyla tamamlandı!");
+
+                CleanCustomerForUpdate();
+
+                jQuery("#buttonModalCreateOrCustomerClose").trigger("click");
+            } else {
+
+                alert("İşleminiz sırasında bir hata oluştu!");
+            }
+        },
+        error: function (xhr, txtStatus, errorThrown) {
+            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+        }
+    });
+}
+
+function GetCustomerForUpdate(customerID) {
+
+    var params = "?companyID=" + g_CompanyID + "&customerID=" + customerID;
+
+    jQuery.support.cors = true;
+    $.ajax({
+        type: "GET",
+        url: g_ServiceUrl + "/api/Customer/GetCustomer" + params,
+        dataType: 'json',
+        cache: false,
+        headers: { "Authorization": "Bearer " + g_AuthorizedToken },
+        success: function (data) {
+
+            if (data.HttpStatusCode === 200) {
+
+                jQuery('#inputCustomerID').val(data.Result.ID);
+                jQuery('#inputCustomerName').val(data.Result.Name);
+                jQuery('#inputCustomerEmail').val(data.Result.Email);
+                jQuery('#inputCustomerDescription').val(data.Result.Description);
+                document.getElementById('inputCustomerStatus').checked = data.Result.Status === 1 ? true : false;
+
+            } else {
+
+                alert("İşleminiz sırasında bir hata oluştu!");
+            }
+        },
+        error: function (xhr, txtStatus, errorThrown) {
+            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+        }
+    });
+}
+
+function DeleteOrRolbackCustomer() {
+
+    var customerID = jQuery('#inputCustomerID').val();
+    var rollback = jQuery('#inputCustomerRollback').val();
+
+    var params = "?companyID=" + g_CompanyID + "&customerID=" + customerID;
+
+    jQuery.support.cors = true;
+    $.ajax({
+        type: "DELETE",
+        url: g_ServiceUrl + "/api/Customer/" + (rollback === "true" ? "RollbackCustomer" : "DeleteCustomer") + params,
+        dataType: 'json',
+        cache: false,
+        headers: { "Authorization": "Bearer " + g_AuthorizedToken },
+        success: function (data) {
+
+            if (data.HttpStatusCode === 200) {
+                GetAllCustomersByPage(1);
+
+                alert("İşleminiz başarıyla tamamlandı!");
+
+                jQuery("#buttonModalDeleteOrRollbackClose").trigger("click");
+            } else {
+
+                alert("İşleminiz sırasında bir hata oluştu!");
+            }
+        },
+        error: function (xhr, txtStatus, errorThrown) {
+            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+        }
+    });
 }

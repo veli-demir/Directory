@@ -35,12 +35,12 @@ namespace DirectoryService.Controllers
                 CustomerDto customerDto = (from c in context.Customer
                                            where c.CompanyID == companyID
                                            where c.ID == customerID
-                                           where c.Status > 0
                                            select new CustomerDto
                                            {
                                                ID = c.ID,
                                                CompanyID = c.CompanyID,
                                                Name = c.Name,
+                                               Email = c.Email,
                                                Description = c.Description,
                                                ImageUrl = c.ImageUrl,
                                                Status = c.Status,
@@ -82,7 +82,7 @@ namespace DirectoryService.Controllers
                 List<CustomerDto> customerDtoList = (from c in context.Customer.Include("CustomerPhone").Include("CustomerAddress").AsNoTracking()
                                                      where c.CompanyID == companyID
                                                      where c.Status >= filterStatus
-                                                     where c.Name.Contains(filterSearch) || c.Email.Contains(filterSearch) || filterSearch==null
+                                                     where c.Name.Contains(filterSearch) || c.Email.Contains(filterSearch) || filterSearch == null
                                                      select new CustomerDto
                                                      {
                                                          ID = c.ID,
@@ -219,7 +219,7 @@ namespace DirectoryService.Controllers
                 if (authorizedClaims[2].ToString() != "role: admin" && authorizedClaims[0].ToString() != "companyID: " + customerDto.CompanyID)
                     return new ResponseObjectDto(null, 0, "Wrong Authority", 401);
 
-                Customer customer = (from c in context.Customer where c.CompanyID == customerDto.CompanyID where c.ID == customerDto.ID where c.Status > 0 select c).FirstOrDefault();
+                Customer customer = (from c in context.Customer where c.CompanyID == customerDto.CompanyID where c.ID == customerDto.ID select c).FirstOrDefault();
 
                 if (customer != null)
                 {
@@ -259,11 +259,47 @@ namespace DirectoryService.Controllers
                 if (authorizedClaims[2].ToString() != "role: admin" && authorizedClaims[0].ToString() != "companyID: " + companyID)
                     return new ResponseObjectDto(null, 0, "Wrong Authority", 401);
 
-                Customer customer = (from c in context.Customer where c.CompanyID == companyID where c.ID == customerID where c.Status > 0 select c).FirstOrDefault();
+                Customer customer = (from c in context.Customer where c.CompanyID == companyID where c.ID == customerID select c).FirstOrDefault();
 
                 if (customer != null)
                 {
                     customer.Status = -1;
+                }
+                else
+                {
+                    return new ResponseObjectDto(null, 0, "No Content", 202);
+                }
+
+                context.SaveChanges();
+
+                return new ResponseObjectDto(null, 1, "Accept", 200);
+            }
+            catch (WebException exc)
+            {
+                return new ResponseObjectDto(null, 0, exc.Message, (int)(((HttpWebResponse)exc.Response)).StatusCode);
+            }
+        }
+
+        // DELETE api/Customer/RollbackCustomer?
+        [HttpDelete]
+        [ActionName("RollbackCustomer")]
+        public ResponseObjectDto RollbackCustomer(int companyID, int customerID)
+        {
+            if (!ModelState.IsValid)
+                return new ResponseObjectDto(null, 0, "Bad Request", 400);
+
+            try
+            {
+                List<Claim> authorizedClaims = ((ClaimsIdentity)User.Identity).Claims.ToList();
+
+                if (authorizedClaims[2].ToString() != "role: admin" && authorizedClaims[0].ToString() != "companyID: " + companyID)
+                    return new ResponseObjectDto(null, 0, "Wrong Authority", 401);
+
+                Customer customer = (from c in context.Customer where c.CompanyID == companyID where c.ID == customerID select c).FirstOrDefault();
+
+                if (customer != null)
+                {
+                    customer.Status = 1;
                 }
                 else
                 {
