@@ -1,4 +1,4 @@
-# Udemy Course - Uygulamalı MVC Fullstack .Net Yazılım Geliştirme
+# Udemy Kursu - Uygulamalı MVC Fullstack .Net Yazılım Geliştirme
 
 **Directory - Müşteri Ürün Yönetimi Kayıt Sistemi projesidir.**
 
@@ -19,7 +19,7 @@ MVC-NTier yazılım mimarileri, Xml ve Json veri formatları, BackEnd, FrontEnd 
 
 VisualStudio, Sql Server ve Postman kurulumu, Github'ın VisualStudio ile kullanımı,  
 
-WebServis(RestFull) ve Portal(WebApplication) olmak üzere Bootstrap'li admin paneli oluşturma,
+WebServis(RESTFul) ve Portal(WebApplication) olmak üzere Bootstrap'li admin paneli oluşturma,
 
 Database First çalışma mantığı, Code First farkı, DrawIO ile database diyagramları ve akı şemaları çizme hakkında bilgi, 
 
