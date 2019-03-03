@@ -19,11 +19,15 @@
     <link href="~/Assets/Css/LoginPage.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    @* Validation *@
+    @Styles.Render("~/bundles/validationCss")
+    @Scripts.Render("~/bundles/validationJs")
 </head>
 <body>
     <div class="container">
 
-        <form class="form-signin">
+        <form class="form-signin" role="form" data-validate="parsley" id="formLogin">
             <img style="display:block; margin: 0 auto" src="~/Assets/Image/directory.png" />
             <h2 class="form-signin-heading">Directory</h2>
             <div class="form-group">
@@ -53,33 +57,35 @@
         <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Register</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" id="inputNameRegister" class="form-control" placeholder="Name" required="" autofocus="">
+                    <form role="form" data-validate="parsley" id="formRegister">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Register</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="inputEmailRegister" class="form-control" placeholder="Email Address" required="" autofocus="">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="text" id="inputNameRegister" class="form-control" placeholder="Name" required="" autofocus="">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="inputEmailRegister" class="form-control" placeholder="Email Address" required="" autofocus="">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="inputPhoneRegister" class="form-control" placeholder="Phone" required="" autofocus="">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="inputPasswordRegister" class="form-control" placeholder="Password" required="">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="inputPasswordAgainRegister" class="form-control" placeholder="Password Again" required="">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="inputPhoneRegister" class="form-control" placeholder="Phone" required="" autofocus="">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="Register(); return false;">Save changes</button>
                         </div>
-                        <div class="form-group">
-                            <input type="password" id="inputPasswordRegister" class="form-control" placeholder="Password" required="">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="inputPasswordAgainRegister" class="form-control" placeholder="Password Again" required="">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="Register(); return false;">Save changes</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

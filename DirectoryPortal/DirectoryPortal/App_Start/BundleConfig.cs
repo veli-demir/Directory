@@ -25,6 +25,14 @@ namespace DirectoryPortal
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Assets/Css/Default/Content/bootstrap.css",
                       "~/Assets/Css/MyStyle.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/validationCss").Include(
+                      "~/Assets/AlertifyJs/css/alertify.min.css",
+                        "~/Assets/ParsleyJs/parsley.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/validationJs").Include(
+                        "~/Assets/AlertifyJs/alertify.min.js",
+                        "~/Assets/ParsleyJs/parsley.min.js"));
         }
     }
 }

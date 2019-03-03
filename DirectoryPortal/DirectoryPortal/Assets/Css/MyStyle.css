@@ -122,3 +122,8 @@ input:checked + .slider:before {
     .slider.round:before {
         border-radius: 50%;
     }
+
+/* Remove parsler error label --VD*/
+.parsley-errors-list {
+    display:none !important;
+}

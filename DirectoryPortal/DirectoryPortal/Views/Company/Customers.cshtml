@@ -80,38 +80,41 @@
     <div class="modal fade" id="modalCustomerCreateOrUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Customer</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="panel-body pb-5">
-                    <input type="hidden" id="inputCustomerID">
-                    <div class="form-group">
-                        <input type="text" id="inputCustomerName" class="form-control" placeholder="Name" required="" autofocus="">
+
+                <form role="form" data-validate="parsley" id="formCustomerCreateOrUpdate">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Customer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <input type="email" id="inputCustomerEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="inputCustomerDescription" class="form-control" placeholder="Description" required="" autofocus="">
-                    </div>
-                    <div class="line lineBlue2px"></div>
-                    <div class="mt-10">
-                        <label class="col-sm-8"> Status:</label>
-                        <div class="col-sm-4">
-                            <label class="switch pull-right">
-                                <input id="inputCustomerStatus" type="checkbox" checked="">
-                                <span class="slider round"> </span>
-                            </label>
+                    <div class="panel-body pb-5">
+                        <input type="hidden" id="inputCustomerID">
+                        <div class="form-group">
+                            <input type="text" id="inputCustomerName" class="form-control" placeholder="Name" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="inputCustomerEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="inputCustomerDescription" class="form-control" placeholder="Description" required="" autofocus="">
+                        </div>
+                        <div class="line lineBlue2px"></div>
+                        <div class="mt-10">
+                            <label class="col-sm-8"> Status:</label>
+                            <div class="col-sm-4">
+                                <label class="switch pull-right">
+                                    <input id="inputCustomerStatus" type="checkbox" checked="">
+                                    <span class="slider round"> </span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonModalCreateOrCustomerClose">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="CreateOrUpdateCusotmer(); return false;">Save changes</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonModalCreateOrCustomerClose">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="CreateOrUpdateCusotmer(); return false;">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

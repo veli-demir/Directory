@@ -1,8 +1,14 @@
 ﻿function Login() {
 
+    var control = jQuery('#formLogin').parsley().validate();
+    if (control === false)
+        return;
+
     var email = jQuery('#inputEmail').val();
     var password = jQuery('#inputPassword').val();
     var params = "?email=" + email + "&password=" + password;
+
+    alertify.success("Lütfen bekleyiniz.");
 
     $.ajax({
         type: "POST",
@@ -14,16 +20,20 @@
                 window.location = "http://localhost:50922/" + data;
             } else {
 
-                alert("Giriş işleminiz sırasında bir hata oluştu!");
+                alertify.error("Giriş işleminiz sırasında bir hata oluştu!");
             }
         },
         error: function (xhr, txtStatus, errorThrown) {
-            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+            alertify.error("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
         }
     });
 }
 
 function Register() {
+
+    var control = jQuery('#formRegister').parsley().validate();
+    if (control === false)
+        return;
 
     var name = jQuery('#inputNameRegister').val();
     var email = jQuery('#inputEmailRegister').val();
@@ -31,7 +41,7 @@ function Register() {
     var password = jQuery('#inputPasswordRegister').val();
     var passwordAgain = jQuery('#inputPasswordAgainRegister').val();
     if (password !== passwordAgain) {
-        alert("Giriş işleminiz sırasında bir hata oluştu!");
+        alertify.error("Giriş işleminiz sırasında bir hata oluştu!");
     } else {
 
         var params = "?name=" + name + "&email=" + email + "&password=" + password + "&phone=" + phone;
@@ -41,10 +51,10 @@ function Register() {
             url: "http://localhost:50894/api/Authanticate/Register" + params,
             cache: false,
             success: function (data) {
-                alert("İşleminiz başarıyla tamamlandı");
+                alertify.success("İşleminiz başarıyla tamamlandı");
             },
             error: function (xhr, txtStatus, errorThrown) {
-                alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+                alertify.error("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
             }
         });
     }

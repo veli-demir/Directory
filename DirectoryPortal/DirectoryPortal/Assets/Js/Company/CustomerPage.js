@@ -42,11 +42,11 @@ function GetAllCustomersByPage(pageIndex, selectedSortColumn, selectedSortOrder)
                 WritePaginationAllCustomersByPage(pageIndex, data.AllItemCount, pageSize);
             } else {
 
-                alert("Giriş işleminiz sırasında bir hata oluştu!");
+                alertify.error("Giriş işleminiz sırasında bir hata oluştu!");
             }
         },
         error: function (xhr, txtStatus, errorThrown) {
-            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+            alertify.error("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
         }
     });
 }
@@ -115,6 +115,10 @@ function CleanCustomerForUpdate() {
 
 function CreateOrUpdateCusotmer() {
 
+    var control = jQuery('#formCustomerCreateOrUpdate').parsley().validate();
+    if (control === false)
+        return;
+
     var customerID = jQuery('#inputCustomerID').val();
 
     var customer = {
@@ -141,18 +145,18 @@ function CreateOrUpdateCusotmer() {
             if (data.HttpStatusCode === 200) {
                 GetAllCustomersByPage(1);
 
-                alert("İşleminiz başarıyla tamamlandı!");
+                alertify.success("İşleminiz başarıyla tamamlandı!");
 
                 CleanCustomerForUpdate();
 
                 jQuery("#buttonModalCreateOrCustomerClose").trigger("click");
             } else {
 
-                alert("İşleminiz sırasında bir hata oluştu!");
+                alertify.error("İşleminiz sırasında bir hata oluştu!");
             }
         },
         error: function (xhr, txtStatus, errorThrown) {
-            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+            alertify.error("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
         }
     });
 }
@@ -180,11 +184,11 @@ function GetCustomerForUpdate(customerID) {
 
             } else {
 
-                alert("İşleminiz sırasında bir hata oluştu!");
+                alertify.error("İşleminiz sırasında bir hata oluştu!");
             }
         },
         error: function (xhr, txtStatus, errorThrown) {
-            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+            alertify.error("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
         }
     });
 }
@@ -208,16 +212,16 @@ function DeleteOrRolbackCustomer() {
             if (data.HttpStatusCode === 200) {
                 GetAllCustomersByPage(1);
 
-                alert("İşleminiz başarıyla tamamlandı!");
+                alertify.success("İşleminiz başarıyla tamamlandı!");
 
                 jQuery("#buttonModalDeleteOrRollbackClose").trigger("click");
             } else {
 
-                alert("İşleminiz sırasında bir hata oluştu!");
+                alertify.error("İşleminiz sırasında bir hata oluştu!");
             }
         },
         error: function (xhr, txtStatus, errorThrown) {
-            alert("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
+            alertify.error("Hata Kodu:" + xhr.status + " " + txtStatus + "\n" + errorThrown);
         }
     });
 }

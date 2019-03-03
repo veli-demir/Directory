@@ -4,26 +4,28 @@
 <html>
 <head>
     @{
-        string g_LocalUrl = ConfigurationManager.AppSettings["LocalUrl"];
-        string g_ServiceUrl = ConfigurationManager.AppSettings["ServiceUrl"];
+                    /**/
 
-        if (Session["AuthorizedName"] != null && Session["AuthorizedToken"] != null && Session["AuthorizedRole"] != null && Session["CompanyID"] != null)
-        {
-            string AuthorizedName = Session["AuthorizedName"].ToString();
-            string AuthorizedToken = Session["AuthorizedToken"].ToString();
-            string CompanyID = Session["CompanyID"].ToString();
-            string AuthorizedRole = Session["AuthorizedRole"].ToString();
+                    string g_LocalUrl = ConfigurationManager.AppSettings["LocalUrl"];
+                    string g_ServiceUrl = ConfigurationManager.AppSettings["ServiceUrl"];
 
-            @Html.Hidden("g_HiddenLocalUrl", g_LocalUrl);
-            @Html.Hidden("g_HiddenServiceUrl", g_ServiceUrl);
+                    if (Session["AuthorizedName"] != null && Session["AuthorizedToken"] != null && Session["AuthorizedRole"] != null && Session["CompanyID"] != null)
+                    {
+                        string AuthorizedName = Session["AuthorizedName"].ToString();
+                        string AuthorizedToken = Session["AuthorizedToken"].ToString();
+                        string CompanyID = Session["CompanyID"].ToString();
+                        string AuthorizedRole = Session["AuthorizedRole"].ToString();
 
-            @Html.Hidden("g_HiddenCompanyID", CompanyID);
-            @Html.Hidden("g_HiddenAuthorizedToken", AuthorizedToken);
-        }
-        else
-        {
-            Response.Redirect(Url.RouteUrl(new { controller = "Login", action = "Login" }));
-        }
+                        @Html.Hidden("g_HiddenLocalUrl", g_LocalUrl);
+                        @Html.Hidden("g_HiddenServiceUrl", g_ServiceUrl);
+
+                        @Html.Hidden("g_HiddenCompanyID", CompanyID);
+                        @Html.Hidden("g_HiddenAuthorizedToken", AuthorizedToken);
+                    }
+                    else
+                    {
+                        Response.Redirect(Url.RouteUrl(new { controller = "Login", action = "Login" }));
+                    }
     }
 
     <meta charset="utf-8" />
@@ -37,6 +39,10 @@
     @* Scripts *@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    @* Validation *@
+    @Styles.Render("~/bundles/validationCss")
+    @Scripts.Render("~/bundles/validationJs")
     @RenderSection("scripts", required: false)
 </head>
 <body>
