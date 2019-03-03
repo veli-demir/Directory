@@ -29,11 +29,11 @@ EntityFramework ile veri tabanı işlemleri (Ado.Net, LinQ),
 
 DataAnnotation, Layout'un (MasterPage) avantajı, 
 
-Tablolama ve Yönetim sayfaları oluşturma (Paging, Sorting, Filter Status, Filter Search, Create, Update, Delete, UnDelete).
+Tablolama ve Yönetim sayfaları oluşturma (Paging, Sorting, Filter Status, Filter Search, Create, Update, Delete, UnDelete),
+
+AlertifyJs ve ParsleyJs ile kontrollü form yapıları oluşturma.
 
 **Kursuma eklenecek içerikler:**
-
-AlertifyJs, ParsleyJs ile kontrollü form yapıları oluşturma,
 
 CroppicJs eklentisi ile resim dosyası işleme, 
 
